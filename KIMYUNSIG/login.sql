@@ -7,6 +7,7 @@ birth datetime ,-- 생년월일
 gender varchar(1),  
 email varchar(20),
 phone varchar(20) not null,
+ FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
 select * from login;
