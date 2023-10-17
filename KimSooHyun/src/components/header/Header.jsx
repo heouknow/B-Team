@@ -6,8 +6,10 @@ import { useState } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ type }) => {
+    const [destination, setDestination] = useState("");
     const [openDate, setOpenDate] = useState(false);
     const [date, setDate] = useState([
         {
@@ -22,6 +24,9 @@ const Header = ({ type }) => {
 
     });
 
+    const navigate = useNavigate();
+
+
     const handleOption = (name, operation) => {
         setOptions((prev) => {
             return {
@@ -31,6 +36,9 @@ const Header = ({ type }) => {
         });
     };
 
+    const handleSearch = () => {
+        navigate("/ground", { state: { destination, date, options } });
+    };
     return (
         <div className="header">
             <div className={
@@ -59,14 +67,15 @@ const Header = ({ type }) => {
                         <p className="headerDesc">
                             축구, 풋살, 농구 중 종목을 선택하고 구장을 예약하세요. 수많은 구장이 기다리고 있습니다.
                         </p>
-                        <button className="headerBtn">로그인 / 등록하기</button>
+                        <button className="headerBtn">로그인 / 회원가입</button>
                         <div className="headerSearch">
                             <div className="headerSearchItem">
                                 <FontAwesomeIcon icon={faTicket} className="headerIcon" />
                                 <input
                                     type="text"
                                     placeholder="경기장을 선택해주세요?"
-                                    className="headerSearchInput" />
+                                    className="headerSearchInput"
+                                    onChange={(e) => setDestination(e.target.value)} />
                             </div>
                             <div className="headerSearchItem">
                                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
@@ -82,6 +91,7 @@ const Header = ({ type }) => {
                                     moveRangeOnFirstSelection={false}
                                     ranges={date}
                                     className="date"
+                                    minDate={new Date()}
 
                                 />}
                             </div>
@@ -115,7 +125,7 @@ const Header = ({ type }) => {
                                 )}
                             </div>
                             <div className="headerSearchItem">
-                                <button className="headerBtn">찾기</button>
+                                <button className="headerBtn" onClick={handleSearch}>검색</button>
                             </div>
                         </div></>)}
 
