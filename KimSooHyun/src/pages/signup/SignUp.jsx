@@ -79,7 +79,7 @@ const SignUp = () => {
     return (
         <div className="signUp">
             <form onSubmit={handleSubmit}>
-                <h1>가입하기</h1>
+                <h1 className="signUpH1">가입하기</h1>
                 {inputs.map((input) => (
                     <FormInput
                         key={input.user_Num}
@@ -88,7 +88,7 @@ const SignUp = () => {
                         onChange={onChange}
                     />
                 ))}
-                <button>제출하기</button>
+                <button className="signUpbutton">제출하기</button>
             </form>
         </div>
     );
