@@ -39,6 +39,11 @@ const Header = ({ type }) => {
     const handleSearch = () => {
         navigate("/ground", { state: { destination, date, options } });
     };
+    const signUpGo = () => {
+        navigate("/signup");
+    };
+
+
     return (
         <div className="header">
             <div className={
@@ -67,7 +72,7 @@ const Header = ({ type }) => {
                         <p className="headerDesc">
                             축구, 풋살, 농구 중 종목을 선택하고 구장을 예약하세요. 수많은 구장이 기다리고 있습니다.
                         </p>
-                        <button className="headerBtn">로그인 / 회원가입</button>
+                        <button className="headerBtn" onClick={signUpGo}> 로그인 / 회원가입</button>
                         <div className="headerSearch">
                             <div className="headerSearchItem">
                                 <FontAwesomeIcon icon={faTicket} className="headerIcon" />
