@@ -1,60 +1,57 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+
 import "./login.css";
 
 const Login = () => {
-  const [credentials, setCredentials] = useState({
-    username: undefined,
-    password: undefined,
-  });
+    const [values, setValues] = useState({
+        user_Id: "",
+        user_Pw: "",
+    });
 
-  const { loading, error, dispatch } = useContext(AuthContext);
+    const navigate = useNavigate()
 
-  const navigate = useNavigate()
+    const onChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
 
-  const handleChange = (e) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:3001/login', { values })
+            .then((response) => {
+                console.log('전송', response);
+                navigate("/");
+            })
+            .catch(err => console.log(err))
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    dispatch({ type: "LOGIN_START" });
-    try {
-      const res = await axios.post("/auth/login", credentials);
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      navigate("/")
-    } catch (err) {
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
-    }
-  };
+    };
 
 
-  return (
-    <div className="login">
-      <div className="lContainer">
-        <input
-          type="text"
-          placeholder="username"
-          id="username"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <input
-          type="password"
-          placeholder="password"
-          id="password"
-          onChange={handleChange}
-          className="lInput"
-        />
-        <button disabled={loading} onClick={handleClick} className="lButton">
-          Login
-        </button>
-        {error && <span>{error.message}</span>}
-      </div>
-    </div>
-  );
+    return (
+        <div className="login">
+            <form className="lContainer" onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="아이디를 입력해주세요"
+                    id="username"
+                    onChange={onChange}
+                    className="lInput"
+                />
+                <input
+                    type="password"
+                    placeholder="비밀번호를 입력해주세요"
+                    id="password"
+                    onChange={onChange}
+                    className="lInput"
+                />
+                <button className="lButton">
+                    로그인
+                </button>
+            </form>
+
+        </div>
+    );
 };
 
 export default Login;
