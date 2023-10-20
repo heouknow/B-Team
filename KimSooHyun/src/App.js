@@ -7,6 +7,7 @@ import Home from "./pages/home/Home";
 import List from "./pages/list/List";
 import Ground from "./pages/ground/Ground";
 import SignUp from "./pages/signup/SignUp";
+import Login from "./pages/login/Login";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/ground" element={<List />} />
         <Route path="/ground/:id" element={<Ground />} />
         <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
