@@ -9,8 +9,8 @@ let options = {
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: '1234',
-    database: 'team_project'
+    password: '12341234',
+    database: 'b_team'
 };
 
 let sessionStore = new MySQLStore(options);
@@ -48,8 +48,8 @@ app.use(
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '1234',
-  database: 'team_project',
+  password: '12341234',
+  database: 'b_team',
 });
 
 app.post('/signup', (req, res) => {

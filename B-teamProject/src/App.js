@@ -9,7 +9,7 @@ import List from "./pages/list/List";
 import Ground from "./pages/ground/Ground";
 import SignUp from "./pages/signup/SignUp";
 import Login from "./pages/login/Login";
-import Signtest from "./pages/signup/Signtest";
+//import Signtest from "./pages/signup/Signtest";
 import Logged from "./pages/home/Logged";
 import Mypage from "./pages/mypage/Mypage";
 import grounddata from './pages/list/grounddata.js'
@@ -28,7 +28,7 @@ function App() {
         <Route path="/ground/:id" element={<Ground ground={ground} />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signtest" element={<Signtest />} />
+        {/* <Route path="/signtest" element={<Signtest />} /> */}
         <Route path="/logged" element={<Logged />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="*" element={<div>404페이지입니다</div>} />

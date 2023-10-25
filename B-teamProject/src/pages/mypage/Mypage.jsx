@@ -5,7 +5,7 @@ import Navbarlogged from "../../components/navbar/Navbarlogged";
 
 const Mypage = () => {
     const location = useLocation();
-    const { title, area, img } = location.state;
+    const { title, area, img } = location.state || {};
 
     return (
         <>  <Navbarlogged />
