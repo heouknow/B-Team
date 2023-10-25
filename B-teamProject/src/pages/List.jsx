@@ -14,10 +14,8 @@ import { useNavigate } from "react-router-dom";
 const List = (props) => {
     let [ground2] = useState(props.ground)
 
-    const [searchTerm, setSearchTerm] = useState("");
-
     const handleSearch = () => {
-        setDestination(searchTerm);
+        setDestination(destination);
     };
 
     const location = useLocation();

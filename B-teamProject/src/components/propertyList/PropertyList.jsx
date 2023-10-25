@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const PropertyList = (props) => {
-    const [pldata4] = useState(props.pldata3 || []);
+    const [pldata4] = useState(props.pldata3);
     const navigate = useNavigate();
 
     return (

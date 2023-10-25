@@ -12,12 +12,22 @@ import {
     faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { DateRange } from "react-date-range";
+import { format } from "date-fns";
 
 const Ground = (props) => {
 
     let { id } = useParams();
     id = parseInt(id);
-    console.log(id);
+
+    const [openDate, setOpenDate] = useState(false);
+    const [date, setDate] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection'
+        }
+    ]);
 
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
@@ -70,7 +80,8 @@ const Ground = (props) => {
                 state: {
                     title: props.ground[id].title,
                     area: props.ground[id].area,
-                    img: props.ground[id].img
+                    img: props.ground[id].img,
+                    date: date,
                     // or the actual area from your data
                 }
             });
@@ -104,6 +115,22 @@ const Ground = (props) => {
                         />
                     </div>
                 )}
+
+                <div className="lsItem">
+                    <label>날짜</label>
+                    <span onClick={() => setOpenDate(!openDate)}>  {`${format(date[0].startDate, "yy년MM월dd일")}~${format(
+                        date[0].endDate,
+                        "yy년MM월dd일"
+                    )}`} </span>
+                    {openDate && (
+                        <DateRange
+                            onChange={(item) => setDate([item.selection])}
+                            minDate={new Date()}
+                            ranges={date}
+                        />
+                    )}
+                </div>
+
                 <div className="groundWrapper">
                     <button onClick={handleReservation} className="bookNow" >예약신청</button>
                     <h1 className="groundTitle">{props.ground[id].title}</h1>
