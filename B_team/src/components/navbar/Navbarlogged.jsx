@@ -30,7 +30,13 @@ const Navbarlogged = () => {
 };
 
   const logged = () => {
-    navigate('/mypage');
+    axios.post('http://localhost:3001/mypageinfo2')
+                            .then(response =>{ console.dir(response);                              
+                        })
+                        .catch(err => console.log(err))
+    navigate("/mypage", {
+    
+  });
   };
 
   const logout = () => {

@@ -14,8 +14,8 @@ const Featured = () => {
                     className="featuredImg"
                 />
                 <div className="featuredTitles">
-                    <h1>서울시 송파구</h1>
-                    <h2>잠실 로꼬풋살스타디움 </h2>
+                    <h1>서울시 마포구</h1>
+                    <h2>마포 난지천 인조잔디 </h2>
                 </div>
             </div>
 
@@ -28,8 +28,8 @@ const Featured = () => {
                     className="featuredImg"
                 />
                 <div className="featuredTitles">
-                    <h1>수원시 권선구</h1>
-                    <h2>노총스포츠파크 풋살장</h2>
+                    <h1>서울시 양천구</h1>
+                    <h2>목동 종합운동장</h2>
                 </div>
             </div>
             <div className="featuredItem" onClick={() => {
@@ -41,8 +41,8 @@ const Featured = () => {
                     className="featuredImg"
                 />
                 <div className="featuredTitles">
-                    <h1>김포시 고촌읍</h1>
-                    <h2>고촌 태리 실내풋살장</h2>
+                    <h1>파주시 조리읍</h1>
+                    <h2>JM 풋볼파크</h2>
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         {/* <Route path="/signtest" element={<Signtest />} /> */}
-        <Route path="/logged" element={<Logged />} />
+        <Route path="/logged" element={<Logged pldata2={pldata2} />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="*" element={<div>404페이지입니다</div>} />
       </Routes>

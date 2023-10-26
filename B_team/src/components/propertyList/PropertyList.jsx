@@ -2,6 +2,7 @@ import "./propertyList.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const PropertyList = (props) => {
     const [pldata4] = useState(props.pldata3 || []);
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const PropertyList = (props) => {
                     key={i}
                     onClick={() => {
                         // useNavigate hook을 사용하여 이동
-                        navigate(`/ground/${a.id}`);
+                        navigate(`/ground/${a.id}`);                 
                     }}
                 >
                     <img src={a.img} alt="" className="pListImg" />

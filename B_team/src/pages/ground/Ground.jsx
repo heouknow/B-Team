@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import "./ground.css";
-import Navbarlogged from "../../components/navbar/Navbarlogged";
+import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
@@ -10,12 +10,14 @@ import {
     faCircleArrowRight,
     faCircleXmark,
     faLocationDot,
+    faCalendarDays,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 
 const Ground = (props) => {
+
 
     let { id } = useParams();
     id = parseInt(id);
@@ -31,6 +33,9 @@ const Ground = (props) => {
 
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
+
+    let obj = { ti: props.ground[id] }
+    localStorage.setItem('data', JSON.stringify(obj))
 
     const photos = [
         {
@@ -83,6 +88,7 @@ const Ground = (props) => {
                     img: props.ground[id].img,
                     date: date,
                     // or the actual area from your data
+
                 }
             });
         }
@@ -90,7 +96,7 @@ const Ground = (props) => {
 
     return (
         <div>
-            <Navbarlogged />
+            <Navbar />
             <Header type="list" />
             <div className="groundContainer">
                 {open && (
@@ -115,20 +121,26 @@ const Ground = (props) => {
                         />
                     </div>
                 )}
-
-                <div className="lsItem">
-                    <label>날짜</label>
-                    <span onClick={() => setOpenDate(!openDate)}>  {`${format(date[0].startDate, "yy년MM월dd일")}~${format(
-                        date[0].endDate,
-                        "yy년MM월dd일"
-                    )}`} </span>
-                    {openDate && (
-                        <DateRange
-                            onChange={(item) => setDate([item.selection])}
-                            minDate={new Date()}
-                            ranges={date}
-                        />
-                    )}
+                <div className="gContainer">
+                    <div className="gSearch">
+                        <div className="gSearchItem">
+                            <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
+                            <label>날짜 선택</label>
+                            <span
+                                onClick={() => setOpenDate(!openDate)}
+                                className="gSearchText"> {`${format(date[0].startDate, "yy년MM월dd일")}~${format(
+                                    date[0].endDate,
+                                    "yy년MM월dd일"
+                                )}`} </span>
+                            {openDate && (
+                                <DateRange
+                                    onChange={(item) => setDate([item.selection])}
+                                    minDate={new Date()}
+                                    ranges={date}
+                                />
+                            )}
+                        </div>
+                    </div>
                 </div>
 
                 <div className="groundWrapper">

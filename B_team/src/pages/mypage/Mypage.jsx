@@ -1,15 +1,12 @@
 import { useLocation } from "react-router-dom";
 import Navbarlogged from "../../components/navbar/Navbarlogged";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-// import Footer from "../../components/footer/Footer";
-// import MailList from "../../components/mailList/MailList";
 
 const Mypage = (props) => {
-    let [ground2] = useState(props.ground)
     const location = useLocation();
-    const [date, setDate] = useState(location.state?.date || [
+    const [date, setDate] = useState([
         {
             startDate: new Date(),
             endDate: new Date(),
@@ -17,11 +14,25 @@ const Mypage = (props) => {
         }
     ]);
     const [openDate, setOpenDate] = useState(false);
-    // const { title, area, img } = location.state;
-    const { title, area, img } = location.state || {};
+
+    // Use useEffect to fetch data from localStorage when the component mounts
+    useEffect(() => {
+        const stg = localStorage.getItem('data');
+        if (stg) {
+            const parsedData = JSON.parse(stg);
+            if (parsedData.ti) {
+                setDate(parsedData.ti.date || date);
+            }
+        }
+    }, []);
+
+    const title = location.state?.title;
+    const area = location.state?.area;
+    const img = location.state?.img;
 
     return (
-        <>  <Navbarlogged />
+        <>
+            <Navbarlogged />
             <div>
                 <h1>예약 정보 확인</h1>
                 <p>제목: {title}</p>
@@ -29,28 +40,19 @@ const Mypage = (props) => {
                 <img src={img} alt="ground" width="30%" />
             </div>
             <div className="lsItem">
-                <label>예약 날짜 </label>
-                <span onClick={() => setOpenDate(!openDate)}>  {`${format(date[0].startDate, "yy년MM월dd일")}~${format(
-                    date[0].endDate,
-                    "yy년MM월dd일"
-                )}`} </span>
-                {openDate && (
-                    <DateRange
-                        onChange={(item) => setDate([item.selection])}
-                        minDate={new Date()}
-                        ranges={date}
-                    />
-                )}
+                <p>예약 날짜 </p>
+                <span onClick={() => setOpenDate(!openDate)}>
+                    {`${format(date[0].startDate, "yy년MM월dd일")}~${format(
+                        date[0].endDate,
+                        "yy년MM월dd일"
+                    )}`}
+                </span>
             </div>
-            {/* <MailList />
-            <Footer /> */}
-
         </>
     );
 };
 
-export default Mypage
-
+export default Mypage;
 
 
 // const Mypage = () => {

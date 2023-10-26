@@ -9,8 +9,8 @@ let options = {
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: '1234',
-    database: 'team_project'
+    password: '12341234',
+    database: 'b_team'
 };
 
 let sessionStore = new MySQLStore(options);
@@ -47,8 +47,8 @@ app.use(
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '1234',
-  database: 'team_project',
+  password: '12341234',
+  database: 'b_team',
 });
 
 app.post('/signup', (req, res) => {
@@ -134,7 +134,7 @@ const axios = require('axios'); // Axios 라이브러리 임포트
 // 클라이언트 측 로그인 폼 및 요청
 const user_Id = '사용자_아이디';
 const user_Pw = '사용자_비밀번호';
-
+const mypageinfo = '예약정보';
 
 
 app.post('/login', (req, res) => {
@@ -178,8 +178,16 @@ app.post('/logout', (req, res) => {
   });
 });
 
-
-
+app.post('/mypageinfo', (req, res) => {
+    console.log(req.body);
+    const mypageinfo = req.body;
+    req.session.mypageinfo = mypageinfo;
+    res.json(req.session.mypageinfo);
+});
+app.post('/mypageinfo2',(req,res) => {
+  res.json(mypageinfo.body);
+  console.dir(mypageinfo)
+});
 app.listen(3001, () => {
   console.log(`서버가 ${port} 포트에서 실행 중입니다.`);
 });
